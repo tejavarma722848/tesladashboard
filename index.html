@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="index.js"></script>
+    <script src="speech.js"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="screen">
+        <div class="header">
+            <div class="header_left">
+                <div class="time">
+                    05:30 PM
+                </div>
+                <div class="out_temp">
+                    55°F
+                </div>
+                <div class="neumorphism-toggle">
+                    <input type="checkbox" id="neumorphism" checked>
+                    <label for="neumorphism">
+                        <div class="switch">
+                            <div class="dot"></div>
+                        </div>
+                        <span>Voice Feedback</span>
+                    </label>
+                    <span></span>
+                </div>
+            </div>
+            <div class="header_right">
+                <img src="images/user.svg" alt="account">
+                <div class="range">
+                    <span>150</span>
+                    <div class="range_text">
+                        <span>miles of</span>
+                        <span>charge left</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <!--Div class main -->
+            <div class="left-main" aria-live="assertive">
+                <div class="temp_ctrls show">
+                    <div class="container show">
+                        <p class="title">Temperature Controls</p>
+                        <div class="options">
+                            <div class="temp1">
+                                <div class="left_arr option">
+                                    <img src="images/AC_decrease.svg" alt="dec">
+                                </div>
+                                <div class="temp_indicator option" id="temperature">
+                                    70
+                                </div>
+                                <div class="right_arr option">
+                                    <img src="images/AC_increase.svg" alt="inc">
+                                </div>
+                            </div>
+                            <div class="temp2">
+                                <div class="cool option">
+                                    <img src="images/cool.svg" alt="cool">
+                                    <span class="metaphor_desc">Cool</span>
+                                </div>
+                                <div class="heat option">
+                                    <img src="images/heat.svg" alt="heat">
+                                    <span class="metaphor_desc">Heat</span>
+                                </div>
+                            </div>
+                            <div class="temp3">
+                                <div class="fan option">
+                                    <img src="images/fan.svg" alt="fan">
+                                    <span class="metaphor_desc">Fan</span>
+                                </div>
+                                <div class="seat_heat option">
+                                    <img src="images/seat_heating.svg" alt="fan">
+                                    <span class="metaphor_desc">Seat Heat</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="car_ctrls show">
+                    <div class="container show">
+                        <p class="title">Car Controls</p>
+                        <div class="options">
+                            <div class="option">
+                                <img src="images/door_lock.svg" alt="lock">
+                                <span class="metaphor_desc">Door Lock</span>
+                            </div>
+                            <div class="option side_mirr">
+                                <img src="images/side_mirror.svg" alt="side mirrors">
+                                <span class="metaphor_desc">Side Mirrors</span>
+                            </div>
+                            <div class="option glovebox">
+                                <img src="images/glovebox.svg" style="width: 60px;" alt="Glovebox">
+                                <span class="metaphor_desc">Glovebox</span>
+                            </div>
+                            <div class="option">
+                                <img src="images/wipers.svg" style="width: 65px;" alt="wipers">
+                                <span class="metaphor_desc">Wipers</span>
+                            </div>
+                            <div class="option">
+                                <img src="images/head_light.svg" style="transform: rotate(180deg)" alt="side mirrors">
+                                <span class="metaphor_desc">Headlights</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="conn_ctrls list-container show">
+                    <div class="container show">
+                        <p class="title">Handsfree and Connectivity</p>
+                        <div class="options">
+                            <div class="option">
+                                <img src="images/phone.svg" alt="phone">
+                                <span class="metaphor_desc">Phone</span>
+                            </div>
+                            <div class="option">
+                                <img src="images/bluetooth.svg" alt="bluetooth">
+                                <span class="metaphor_desc">Bluetooth</span>
+                            </div>
+                            <div class="option">
+                                <img src="images/microphone.svg" alt="microphone">
+                                <span class="metaphor_desc">Voice Command</span>
+                            </div>
+                            <div class="option">
+                                <img src="images/navigation.svg" alt="navigation">
+                                <span class="metaphor_desc">Navigation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- popup controls -->
+                <div class="temp_ctrls_opts">
+                    <div class="fan_ctrls">
+                        <div class="heading">
+                            <div class="close" style="margin-left: -25px" id="close">X</div>
+                            <span class="title">Fan Settings</span>
+                        </div>
+                        <p style="margin-bottom: 0" class="title">Front</p>
+                        <div class="front_ctrls">
+                            <div class="fan_speed">
+                                <p>Fan Speed</p>
+                                <input type="range" class="slider fan_speed_slider fan_speed_slider1" step="1" min="0" max="4">
+                                    <div class="slider_text">
+                                        <span>off</span>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <span>max</span>
+                                    </div>
+                            </div>
+                            <div class="fan_direction">
+                                <p>Fan Direction</p>
+                                <div class="fan_direction1">
+                                    <div class="fan_dir_icon highlight"><img src="images/fan_direction1.svg" alt="rewind"></div>
+                                    <div class="fan_dir_icon"><img src="images/fan_direction2.svg" alt="play"></div>
+                                    <div class="fan_dir_icon"><img src="images/fan_direction3.svg" alt="forward"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p style="margin-bottom: 0; margin-top: 30px;" class="title">Rear</p>
+                        <div class="rear_ctrls">
+                            <div class="fan_speed">
+                                <p>Fan Speed</p>
+                                <input type="range" class="slider fan_speed_slider fan_speed_slider2" step="1" min="0" max="4">
+                                    <div class="slider_text">
+                                        <span>off</span>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <span>max</span>
+                                    </div>
+                            </div>
+                            <div class="fan_direction">
+                                <p>Fan Direction</p>
+                                <div class="fan_direction2">
+                                    <div class="fan_dir_icon highlight"><img src="images/fan_direction1.svg" alt="rewind"></div>
+                                    <div class="fan_dir_icon"><img src="images/fan_direction2.svg" alt="play"></div>
+                                    <div class="fan_dir_icon"><img src="images/fan_direction3.svg" alt="forward"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="seat_heat_ctrls">
+                        <div class="heading">
+                            <div class="close" id="close">X</div>
+                            <span class="title">Seat Heating</span>
+                        </div>
+                        <div class="seats">
+                            <div class="front">
+                                <div class="">
+                                    <img class="steering_wheel" src="images/steering_wheel.svg" alt="">
+                                    <img class="seat off" src="images/carseat.svg" alt="">
+                                    <input type="range" class="slider seat_heat_slider seat1 disabled" step="1" min="0" max="3" value="0">
+                                    <div class="slider_text">
+                                        <span>off</span>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <span>max</span>
+                                    </div>
+                                    <p class="seat_text">OFF</p>
+                                </div>
+                                <div class="">
+                                    <img style="margin-top: 48px" class="seat off" src="images/carseat.svg" alt="">
+                                    <input type="range" class="slider seat_heat_slider seat2 disabled" step="1" min="0" max="3" value="0">
+                                    <div class="slider_text">
+                                        <span>off</span>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <span>max</span>
+                                    </div>
+                                    <p class="seat_text">OFF</p>
+                                </div>
+                            </div>
+                            <div class="rear">
+                                <div class="">
+                                    <img class="seat off" src="images/carseat.svg" alt="">
+                                    <input type="range" class="slider seat_heat_slider seat3 disabled" step="1" min="0" max="3" value="0">
+                                    <div class="slider_text">
+                                        <span>off</span>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <span>max</span>
+                                    </div>
+                                    <p class="seat_text">OFF</p>
+                                </div>
+                                <div class="">
+                                    <img class="seat off" src="images/carseat.svg" alt="">
+                                    <input type="range" class="slider seat_heat_slider seat4 disabled" step="1" min="0" max="3" value="0">
+                                    <div class="slider_text">
+                                        <span>off</span>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <span>max</span>
+                                    </div>
+                                    <p class="seat_text">OFF</p>
+                                </div>
+                                <div class="">
+                                    <img class="seat off" src="images/carseat.svg" alt="">
+                                    <input type="range" class="slider seat_heat_slider seat5 disabled" step="1" min="0" max="3" value="0">
+                                    <div class="slider_text">
+                                        <span>off</span>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <span>max</span>
+                                    </div>
+                                    <p class="seat_text">OFF</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- side mirrors-->
+                <div class="car_ctrls_opts">
+                    <div class="side_mirror_ctrls">
+                        <div class="heading">
+                            <div class="close">X</div>
+                            <span class="title">Side Mirrors</span>
+                        </div>
+                        <div class="mirror_selection">
+                            <div class="left_mirror_sel">
+                                <img src="images/side_mirror.svg" alt="left mirror">
+                                <span>Left Mirror</span>
+                            </div>
+                            <div class="right_mirror_sel">
+                                <img src="images/side_mirror.svg" alt="right mirror">
+                                <span>Right Mirror</span>
+                            </div>
+                        </div>
+                        <div class="inst_div">
+                            <span>Select any mirror and adjust on steering wheel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-main">
+                <div class="map_div">
+                    <img src="images/map2.png" alt="" class="map_img">
+                </div>
+                <div class="music_player">
+                    <img class="logo" src="images/music.png" alt="logo">
+                    <div class="music_ctrls">
+                        <div class="volume_ctrls">
+                            <img src="images/mute.svg" style="margin-right: 18px" alt="mute">
+                            <img src="images/volume_down.svg" alt="volume down">
+                            <input type="range">
+                            <img src="images/volume_up.svg" alt="volume up">
+                        </div>
+                        <div class="music_bottom">
+                            <div class="artist">
+                                <p>Sintra</p>
+                                <p>Flume</p>
+                            </div>
+                            <div class="music_player_ctrls">
+                                <div><img src="images/rewind_button.svg" alt="rewind"></div>
+                                <div><img src="images/play.svg" alt="play"></div>
+                                <div><img src="images/forward_button.svg" alt="forward"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <img src="images/menu.svg" alt="menu">
+                    <img src="images/plus.svg" alt="plus">
+                    <img src="images/settings.svg" alt="settings">
+                    <img src="images/help.svg" id="help" alt="help"/>
+                </div>
+            </div>
+        </div>
+
+        <div id="help_document">
+            <div id="close_doc" id="close">X</div>
+            <embed src="documentation.pdf#toolbar=0" id="document" frameborder="10px"></embed>
+        </div>
+    </div>
+</body>
+</html>
